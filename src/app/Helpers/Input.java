@@ -3,6 +3,7 @@ package app.Helpers;
 
 import org.jetbrains.annotations.Contract;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input implements InputInterface {
@@ -109,6 +110,10 @@ public class Input implements InputInterface {
         return this;
     }
 
+    /**
+     *
+     * @return Input
+     */
     @Contract(" -> this")
     private Input getTopology() {
         System.out.printf("Введите количество узлов сети: ");
@@ -118,15 +123,28 @@ public class Input implements InputInterface {
             return this;
         }
 
+        // Для считывания строк нужен новый объект сканера, ибо конфликтует с newtInt
+        Scanner $newScanner = new Scanner(System.in);
+        this.$topology = new int[this.$pointsCount][this.$pointsCount];
+
         // для каждой строки
-        for (int $i = 1; $i < this.$pointsCount+1; $i++) {
+        for (int $i = 0; $i < this.$pointsCount; $i++) {
+
             System.out.printf("Введите %d строку значений (слитно через /): ", $i);
-            this.$valueRow = $input.nextLine();
-//            String[] $valueList = $valueRow.split("/");
-//            // для каждого столбца
-//            for (int $j = 0; $j < this.$pointsCount; $j++) {
-//                this.$topology[$j][$i] = Integer.parseInt($valueList[$j]);
-//            }
+            this.$valueRow = $newScanner.nextLine();
+
+            String[] $valueList = $valueRow.split("/");
+
+            if ($valueList.length != this.$pointsCount) {
+                System.out.printf("Количество элементов в строке не соответствует указанному количеству вершин в топологии");
+                return this;
+            }
+
+            // для каждого столбца
+            for (int $j = 0; $j < this.$pointsCount; $j++) {
+                this.$topology[$j][$i] = Integer.parseInt($valueList[$j]);
+                System.out.print(this.$topology[$j][$i]);
+            }
         }
 
         return this;

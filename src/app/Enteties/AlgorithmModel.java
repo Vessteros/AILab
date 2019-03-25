@@ -19,7 +19,7 @@ public class AlgorithmModel {
     /**
      * Точка входа в программу
      *
-     * @param $input InputInterface
+     * @param $input Input
      */
     public static void start(Input $input) {
         AlgorithmModel $instance = new AlgorithmModel($input);
@@ -35,11 +35,11 @@ public class AlgorithmModel {
         this.$input.getNecessaryInfo();
 
         System.out.println(this.$input.$pointsCount);
-//        for (int[] $row : this.$input.$topology) {
-//            for (int $point : $row) {
-//                System.out.println($point);
-//            }
-//        }
+        for (int[] $row : this.$input.$topology) {
+            for (int $point : $row) {
+                System.out.println($point);
+            }
+        }
 
         return this;
     }
