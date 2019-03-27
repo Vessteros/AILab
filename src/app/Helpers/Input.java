@@ -3,7 +3,6 @@ package app.Helpers;
 
 import org.jetbrains.annotations.Contract;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input implements InputInterface {
@@ -32,11 +31,11 @@ public class Input implements InputInterface {
      */
     public Input getNecessaryInfo() {
         this
-//            .getGenerations()
-//            .getPopulation()
-//            .getGenomeLength()
-//            .getMutationChance()
-//            .getCrossoverType()
+            .getGenerations()
+            .getPopulation()
+            .getGenomeLength()
+            .getMutationChance()
+            .getCrossoverType()
             .getTopology();
 
         return this;
@@ -58,7 +57,7 @@ public class Input implements InputInterface {
      */
     @Contract(" -> this")
     private Input getGenerations() {
-        System.out.printf("Введите количество поколений: ");
+        System.out.println("Введите количество поколений: ");
         this.$generations = $input.nextInt();
 
         return this;
@@ -71,7 +70,7 @@ public class Input implements InputInterface {
      */
     @Contract(" -> this")
     private Input getPopulation() {
-        System.out.printf("Введите количество особей в популяции: ");
+        System.out.println("Введите количество особей в популяции: ");
         this.$population = $input.nextInt();
 
         return this;
@@ -82,7 +81,7 @@ public class Input implements InputInterface {
      */
     @Contract(" -> this")
     private Input getGenomeLength() {
-        System.out.printf("Введите длину генома: ");
+        System.out.println("Введите длину генома: ");
         this.$genomeLength = $input.nextInt();
 
         return this;
@@ -93,7 +92,7 @@ public class Input implements InputInterface {
      */
     @Contract(" -> this")
     private Input getMutationChance() {
-        System.out.printf("Введите шанс мутации: ");
+        System.out.println("Введите шанс мутации: ");
         this.$mutationChance = $input.nextFloat();
 
         return this;
@@ -104,19 +103,18 @@ public class Input implements InputInterface {
      */
     @Contract(" -> this")
     private Input getCrossoverType() {
-        System.out.printf("Выберите тип кроссинговера: ");
+        System.out.println("Выберите тип кроссинговера: ");
         this.$crossoverType = $input.nextInt();
 
         return this;
     }
 
     /**
-     *
      * @return Input
      */
     @Contract(" -> this")
     private Input getTopology() {
-        System.out.printf("Введите количество узлов сети: ");
+        System.out.println("Введите количество узлов сети: ");
         this.$pointsCount = $input.nextInt();
 
         if (this.$pointsCount == 0) {
@@ -130,20 +128,20 @@ public class Input implements InputInterface {
         // для каждой строки
         for (int $i = 0; $i < this.$pointsCount; $i++) {
 
-            System.out.printf("Введите %d строку значений (слитно через /): ", $i);
+            System.out.printf("Введите %d строку значений (слитно через /): ", $i+1);
             this.$valueRow = $newScanner.nextLine();
 
             String[] $valueList = $valueRow.split("/");
 
             if ($valueList.length != this.$pointsCount) {
-                System.out.printf("Количество элементов в строке не соответствует указанному количеству вершин в топологии");
+                System.out.println("Количество элементов в строке не соответствует указанному количеству вершин в топологии.");
+                System.out.println("Завершаю работу.");
                 return this;
             }
 
             // для каждого столбца
             for (int $j = 0; $j < this.$pointsCount; $j++) {
                 this.$topology[$j][$i] = Integer.parseInt($valueList[$j]);
-                System.out.print(this.$topology[$j][$i]);
             }
         }
 

@@ -1,6 +1,6 @@
 package app;
 
-import app.Enteties.AlgorithmModel;
+import app.Entities.AlgorithmModel;
 import app.Helpers.Input;
 
 public class Main {
