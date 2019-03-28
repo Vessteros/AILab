@@ -2,6 +2,8 @@ package app.Entities;
 
 import org.jetbrains.annotations.Contract;
 
+import java.util.ArrayList;
+
 /**
  * Я решил сделать синглтоном популяцию потому, что в каждой части программы
  * должен быть доступен конкретно текущий набор особей.
@@ -9,7 +11,12 @@ import org.jetbrains.annotations.Contract;
  * Singleton
  */
 class PopulationModel {
-    private static PopulationModel $population;
+    private static PopulationModel $instance = new PopulationModel();
+
+    public static int $populationCount = 0;
+    public static int $generationsCount = 0;
+
+    public ArrayList<IndividualModel> $population = new ArrayList<>();
 
     /**
      * Закрытый конструктор синглтона
@@ -29,10 +36,19 @@ class PopulationModel {
      */
     @Contract(pure = true)
     static PopulationModel get() {
-        if ($population == null) {
-            $population = new PopulationModel();
+        return $instance;
+    }
+
+    /**
+     * Генерация первого поколения
+     */
+    void spawnFirstGeneration() throws Exception {
+        if (PopulationModel.$populationCount == 0) {
+            throw new Exception("Не указано количество особей в популяции");
         }
 
-        return $population;
+        for (int $i = 0; $i < PopulationModel.$populationCount; $i++) {
+            this.$population.add(new IndividualModel());
+        }
     }
 }

@@ -16,8 +16,10 @@ public class Input implements InputInterface {
     public int $crossoverType;
     public int $pointsCount;
 
-    public String $valueRow;
     public int[][] $topology;
+
+    public int $firstPoint;
+    public int $lastPoint;
 
     /**
      * Конструктор
@@ -26,9 +28,6 @@ public class Input implements InputInterface {
         this.setScanner();
     }
 
-    /**
-     * @return Input
-     */
     public Input getNecessaryInfo() {
         this
             .getGenerations()
@@ -36,25 +35,18 @@ public class Input implements InputInterface {
             .getGenomeLength()
             .getMutationChance()
             .getCrossoverType()
-            .getTopology();
+            .getTopology()
+            .getPoints();
 
         return this;
     }
 
-    /**
-     * @return Input
-     */
     public Input setScanner() {
         this.$input = new Scanner(System.in);
 
         return this;
     }
 
-    /**
-     * Запишем кол-во поколений
-     *
-     * @return Input
-     */
     @Contract(" -> this")
     private Input getGenerations() {
         System.out.println("Введите количество поколений: ");
@@ -63,11 +55,6 @@ public class Input implements InputInterface {
         return this;
     }
 
-    /**
-     * Запишем количество особей в популяции
-     *
-     * @return Input
-     */
     @Contract(" -> this")
     private Input getPopulation() {
         System.out.println("Введите количество особей в популяции: ");
@@ -87,9 +74,6 @@ public class Input implements InputInterface {
         return this;
     }
 
-    /**
-     * @return Input
-     */
     @Contract(" -> this")
     private Input getMutationChance() {
         System.out.println("Введите шанс мутации: ");
@@ -98,9 +82,6 @@ public class Input implements InputInterface {
         return this;
     }
 
-    /**
-     * @return Input
-     */
     @Contract(" -> this")
     private Input getCrossoverType() {
         System.out.println("Выберите тип кроссинговера: ");
@@ -109,9 +90,6 @@ public class Input implements InputInterface {
         return this;
     }
 
-    /**
-     * @return Input
-     */
     @Contract(" -> this")
     private Input getTopology() {
         System.out.println("Введите количество узлов сети: ");
@@ -129,7 +107,7 @@ public class Input implements InputInterface {
         for (int $i = 0; $i < this.$pointsCount; $i++) {
 
             System.out.printf("Введите %d строку значений (слитно через /): ", $i+1);
-            this.$valueRow = $newScanner.nextLine();
+            String $valueRow = $newScanner.nextLine();
 
             String[] $valueList = $valueRow.split("/");
 
@@ -145,6 +123,16 @@ public class Input implements InputInterface {
             }
         }
 
+        return this;
+    }
+
+    @Contract(" -> this")
+    private Input getPoints() {
+        System.out.println("Введите первый узел: ");
+        this.$firstPoint = $input.nextInt();
+
+        System.out.println("Введите последний узел: ");
+        this.$lastPoint = $input.nextInt();
         return this;
     }
 }

@@ -9,22 +9,45 @@ public class IndividualModel {
 
     public ChromosomeModel $chromosome;
 
+    public float $crossoverChance;
+
+    /**
+     * Конструктор
+     */
     IndividualModel() {
         this.$chromosome = new ChromosomeModel();
+    }
+
+    IndividualModel(ChromosomeModel $chromosome) {
+        this.$chromosome = $chromosome;
     }
 
     /**
      * Модель хромосомы
      */
-    public static class ChromosomeModel {
+    static class ChromosomeModel {
 
         /**
          * Все эти данные должны быть одинаковы для всех объектов этого класса -> static
          */
         static int $genomeLength;
+        static int $crossoverType;
+        static float $mutationChance;
 
         static int $firstGen;
         static int $lastGen;
+
+        private int $fitnessResult;
+
+        public int get$fitnessResult() {
+            return $fitnessResult;
+        }
+
+        public ChromosomeModel set$fitnessResult(int $fitnessResult) {
+            this.$fitnessResult = $fitnessResult;
+
+            return this;
+        }
 
         /**
          * Сама цепочка генов
