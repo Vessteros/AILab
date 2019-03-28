@@ -8,8 +8,13 @@ import org.jetbrains.annotations.Contract;
  * Изменение популяции в одной части программы должно изменить ее для всех остальных
  * Singleton
  */
-public class PopulationModel {
-    private static PopulationModel ourInstance = new PopulationModel();
+class PopulationModel {
+    private static PopulationModel $population;
+
+    /**
+     * Закрытый конструктор синглтона
+     */
+    private PopulationModel() {}
 
     /**
      * Метод для получения объекта синглтона
@@ -23,13 +28,11 @@ public class PopulationModel {
      * @return PopulationModel
      */
     @Contract(pure = true)
-    public static PopulationModel getInstance() {
-        return ourInstance;
-    }
+    static PopulationModel get() {
+        if ($population == null) {
+            $population = new PopulationModel();
+        }
 
-    /**
-     * Закрытый конструктор синглтона
-     */
-    private PopulationModel() {
+        return $population;
     }
 }

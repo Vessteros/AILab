@@ -28,19 +28,18 @@ public class AlgorithmModel {
     }
 
     /**
-     * @return AlgorithmModel
+     * Начало работы программы
      */
-    @Contract(" -> this")
-    private AlgorithmModel start() {
+    private void start() {
         // в свойствах инпута сейчас лежат все данные с консоли
         this.$input.getNecessaryInfo();
 
         // если не симметрична, выходим из программы
         if (!this.checkTopologySymmetrical()) {
-            return this;
+            return;
         }
 
-        return this;
+        PopulationModel $population = PopulationModel.get();
     }
 
     /**
