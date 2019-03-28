@@ -134,7 +134,7 @@ public class Input implements InputInterface {
             String[] $valueList = $valueRow.split("/");
 
             if ($valueList.length != this.$pointsCount) {
-                System.out.println("Количество элементов в строке не соответствует указанному количеству вершин в топологии.");
+                System.out.println("Количество элементов в строке не соответствует указанному количеству генов в геноме");
                 System.out.println("Завершаю работу.");
                 return this;
             }
