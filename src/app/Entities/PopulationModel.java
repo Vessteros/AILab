@@ -13,10 +13,10 @@ import java.util.ArrayList;
 class PopulationModel {
     private static PopulationModel $instance = new PopulationModel();
 
-    public static int $populationCount = 0;
-    public static int $generationsCount = 0;
+    static int $populationCount = 0;
+    static int $generationsCount = 0;
 
-    public ArrayList<IndividualModel> $population = new ArrayList<>();
+    ArrayList<IndividualModel> $population = new ArrayList<>();
 
     /**
      * Закрытый конструктор синглтона

@@ -7,9 +7,20 @@ import java.util.ArrayList;
 
 public class IndividualModel {
 
-    public ChromosomeModel $chromosome;
+    ChromosomeModel $chromosome;
 
     public float $crossoverChance;
+
+    private int $fitnessResult;
+
+    void fitness() {
+        TopologyService $topology = TopologyService.get();
+        ArrayList<IndividualModel.ChromosomeModel.GenomeModel> $genome = this.$chromosome.$genome;
+
+        for (int $i = 0; $i < $genome.size() - 1; $i++) {
+            this.$fitnessResult +=  $topology.getTopology()[$genome.get($i).$graphPoint][$genome.get($i+1).$graphPoint];
+        }
+    }
 
     /**
      * Конструктор

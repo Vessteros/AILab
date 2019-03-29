@@ -1,10 +1,7 @@
 package app.Entities;
 
 import app.Helpers.*;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
+import org.jetbrains.annotations.*;
 
 public class AlgorithmModel {
 
@@ -43,34 +40,33 @@ public class AlgorithmModel {
      * а там уже отловлю в едином блоке
      */
     private void start() throws Exception {
-        // в свойствах инпута сейчас лежат все данные с консоли
-        this.$input.getNecessaryInfo();
+        this.getNecessaryInfo();
 
-        this.setTopology(this.$input);
+        this.setTopology();
 
-        // если не симметрична, выходим из программы
         this.checkTopologySymmetrical();
+
         this.setStaticFields();
 
-        PopulationModel $population = PopulationModel.get();
+        this.spawnFirstGeneration();
 
-        $population.spawnFirstGeneration();
+        this.startAnalysis();
+    }
 
-        this.startAnalysis($population);
+    private void getNecessaryInfo() {
+        this.$input.getNecessaryInfo();
     }
 
     /**
      * Запишем в синглтон топологии значения
-     *
-     * @param $input Input
      */
-    private void setTopology(@NotNull Input $input) {
-        TopologyService.get().setTopology($input.$topology);
-        TopologyService.get().setPointsCount($input.$pointsCount);
+    private void setTopology() {
+        TopologyService.get().setTopology(this.$input.$topology);
+        TopologyService.get().setPointsCount(this.$input.$pointsCount);
     }
 
     /**
-     * Проставим все необходимые значения из ввода
+     * Проставим все необходимые значения с консоли
      */
     private void setStaticFields() {
         PopulationModel.$populationCount = this.$input.$population;
@@ -82,6 +78,13 @@ public class AlgorithmModel {
 
         IndividualModel.ChromosomeModel.$firstGen = this.$input.$firstPoint;
         IndividualModel.ChromosomeModel.$lastGen = this.$input.$lastPoint;
+    }
+
+    /**
+     * Создадим первичную популяцию
+     */
+    private void spawnFirstGeneration() throws Exception {
+        PopulationModel.get().spawnFirstGeneration();
     }
 
     /**
@@ -100,20 +103,21 @@ public class AlgorithmModel {
         }
     }
 
+    private void startAnalysis() {
+        this.fitness();
 
-    private void startAnalysis(@NotNull PopulationModel $population) {
+        this.sortByFitness();
+    }
+
+    private void fitness() {
+        PopulationModel $population = PopulationModel.get();
+
         for (IndividualModel $individual : $population.$population) {
-            this.fitness($individual);
+            $individual.fitness();
         }
     }
 
-    private void fitness(@NotNull IndividualModel $individual) {
-        int $fitnessResult = 0;
+    private void sortByFitness() {
 
-        ArrayList<IndividualModel.ChromosomeModel.GenomeModel> $genome = $individual.$chromosome.$genome;
-
-        for (int $i = 0; $i < $genome.size() - 1; $i++) {
-//            $fitnessResult +=
-        }
     }
 }
