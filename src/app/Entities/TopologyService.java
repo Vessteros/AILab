@@ -4,15 +4,37 @@ import org.jetbrains.annotations.Contract;
 
 public class TopologyService {
 
-    private static TopologyService ourInstance = new TopologyService();
+    private static TopologyService $instance = new TopologyService();
 
-    @Contract(pure = true)
-    public static TopologyService getInstance() {
-        return ourInstance;
-    }
+    private int[][] $topology;
+
+    private int $pointsCount;
 
     /**
      * Приватный конструктор
      */
     private TopologyService() {}
+
+    @Contract(pure = true)
+    static TopologyService get() {
+        return $instance;
+    }
+
+    int[][] getTopology() {
+        return $topology;
+    }
+
+    TopologyService setTopology(int[][] $topology) {
+        this.$topology = $topology;
+        return this;
+    }
+
+    int getPointsCount() {
+        return $pointsCount;
+    }
+
+    TopologyService setPointsCount(int $pointsCount) {
+        this.$pointsCount = $pointsCount;
+        return this;
+    }
 }
