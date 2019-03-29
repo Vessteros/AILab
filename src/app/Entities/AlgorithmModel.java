@@ -104,14 +104,24 @@ public class AlgorithmModel {
                 }
             }
         }
+
+        System.out.println("Топология симметрична, начинаю расчет.");
     }
 
+    /**
+     * Вынес все аналитические необходимости в отдельный метод
+     */
     private void startAnalysis() {
         this.fitness();
+
+        this.increaseStep();
 
         this.sortByFitness();
     }
 
+    /**
+     * Вычисляем пути для всех особей в популяции
+     */
     private void fitness() {
         PopulationModel $population = PopulationModel.get();
 
@@ -120,11 +130,64 @@ public class AlgorithmModel {
         }
     }
 
+    /**
+     * Увеличим шаг
+     */
+    private void increaseStep() {
+        int $step = PopulationModel.get().getStep() + 1;
+
+        PopulationModel.get().setStep($step);
+    }
+
+    /**
+     * Отсортировать в порядке возрастания результата работы фитнес-функции
+     *
+     * Обрати внимание: компаратор вызывается без указания класса.
+     * Это из-за статического импорта в начале файла
+     */
     private void sortByFitness() {
+        this.sort();
+
+        this.setCrossoverChance();
+
+        this.printPopulation();
+    }
+
+    private void sort() {
+        PopulationModel.get().$population.sort(FitnessComparator);
+    }
+
+    /**
+     * Проставляем шанс скрещивания
+     */
+    private void setCrossoverChance() {
+        int $point = (PopulationModel.$populationCount / 100);
+
+        int $individualNumber = 1;
+
+        for (IndividualModel $individual : PopulationModel.get().$population) {
+            $individual.setCrossoverChance(100 - $point*$individualNumber);
+            $individualNumber++;
+        }
+    }
+
+    /**
+     * Вывести популяцию в консоль
+     */
+    private void printPopulation() {
         PopulationModel $population = PopulationModel.get();
 
-        // обрати внимание: компаратор вызывается без указания класса.
-        // Это из-за статического импорта в начале файла
-        $population.$population.sort(FitnessComparator);
+        int $individualNumber = 1;
+
+        for (IndividualModel $ind : $population.$population) {
+            System.out.printf("Особь %d: ", $individualNumber);
+            for (IndividualModel.ChromosomeModel.GenomeModel $gen : $ind.$chromosome.$genome) {
+                System.out.print($gen.$graphPoint + " ");
+            }
+
+            System.out.printf("Путь: %d ", $ind.getFitnessResult());
+            System.out.printf("Шанс ск.: %f\n", $ind.getCrossoverChance());
+            $individualNumber++;
+        }
     }
 }

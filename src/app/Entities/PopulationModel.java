@@ -18,6 +18,16 @@ class PopulationModel {
 
     ArrayList<IndividualModel> $population;
 
+    private int $step = 1;
+
+    int getStep() {
+        return $step;
+    }
+
+    void setStep(int $step) {
+        this.$step = $step;
+    }
+
     /**
      * Закрытый конструктор синглтона
      */

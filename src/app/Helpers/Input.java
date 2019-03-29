@@ -1,6 +1,7 @@
 package app.Helpers;
 
 
+import app.Entities.Crossover;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Scanner;
@@ -51,6 +52,7 @@ public class Input implements InputInterface {
     private Input getGenerations() {
         System.out.println("Введите количество поколений: ");
         this.$generations = $input.nextInt();
+        System.out.println("Количество поколений установлено.\n");
 
         return this;
     }
@@ -59,6 +61,7 @@ public class Input implements InputInterface {
     private Input getPopulation() {
         System.out.println("Введите количество особей в популяции: ");
         this.$population = $input.nextInt();
+        System.out.println("Количество особей установлено.\n");
 
         return this;
     }
@@ -70,14 +73,16 @@ public class Input implements InputInterface {
     private Input getGenomeLength() {
         System.out.println("Введите длину генома: ");
         this.$genomeLength = $input.nextInt();
+        System.out.println("Длина генома установлена.\n");
 
         return this;
     }
 
     @Contract(" -> this")
     private Input getMutationChance() {
-        System.out.println("Введите шанс мутации: ");
+        System.out.println("Введите шанс мутации (float запятая): ");
         this.$mutationChance = $input.nextFloat();
+        System.out.println("Шанс мутации установлен.\n");
 
         return this;
     }
@@ -86,6 +91,7 @@ public class Input implements InputInterface {
     private Input getCrossoverType() {
         System.out.println("Выберите тип кроссинговера: ");
         this.$crossoverType = $input.nextInt();
+        System.out.println("Установлен кроссовер типа " + Crossover.valueOf("type" + this.$crossoverType) + "\n");
 
         return this;
     }
@@ -98,6 +104,8 @@ public class Input implements InputInterface {
         if (this.$pointsCount == 0) {
             throw new Exception("Решение задачи на пустом множестве элементов топологии не имеет смысла. Завершаю работу.");
         }
+
+        System.out.println("Количество узлов сети установлено.\n");
 
         // Для считывания строк нужен новый объект сканера, ибо конфликтует с newtInt
         Scanner $newScanner = new Scanner(System.in);
@@ -120,6 +128,8 @@ public class Input implements InputInterface {
                 this.$topology[$j][$i] = Integer.parseInt($valueList[$j]);
             }
         }
+
+        System.out.println("Топология установлена.\n");
 
         return this;
     }

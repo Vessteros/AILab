@@ -10,9 +10,21 @@ public class IndividualModel {
 
     ChromosomeModel $chromosome;
 
-    public float $crossoverChance;
+    private float $crossoverChance = 0;
 
     private int $fitnessResult;
+
+    public float getCrossoverChance() {
+        return $crossoverChance;
+    }
+
+    public void setCrossoverChance(float $crossoverChance) {
+        this.$crossoverChance = $crossoverChance;
+    }
+
+    int getFitnessResult() {
+        return $fitnessResult;
+    }
 
     void fitness() {
         TopologyService $topology = TopologyService.get();
@@ -36,13 +48,13 @@ public class IndividualModel {
 
     /**
      * Лямбда выражение, изначально был анонимный классец, но IDE предложила заменить, выглядит дорого - богато,
-     * поэтому пускай
+     * поэтому пускай (просто стрелочка, сама понимаешь)
      */
     static Comparator<IndividualModel> FitnessComparator = ($individual1, $individual2) -> {
         int $fitnessResult1 = $individual1.$fitnessResult;
         int $fitnessResult2 = $individual2.$fitnessResult;
 
-        return $fitnessResult2 - $fitnessResult1;
+        return $fitnessResult1 - $fitnessResult2;
     };
 
     /**
@@ -62,11 +74,11 @@ public class IndividualModel {
 
         private int $fitnessResult;
 
-        public int get$fitnessResult() {
+        public int getFitnessResult() {
             return $fitnessResult;
         }
 
-        public ChromosomeModel set$fitnessResult(int $fitnessResult) {
+        public ChromosomeModel setFitnessResult(int $fitnessResult) {
             this.$fitnessResult = $fitnessResult;
 
             return this;
