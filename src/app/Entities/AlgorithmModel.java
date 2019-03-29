@@ -3,6 +3,8 @@ package app.Entities;
 import app.Helpers.*;
 import org.jetbrains.annotations.*;
 
+import static app.Entities.IndividualModel.FitnessComparator;
+
 public class AlgorithmModel {
 
     private Input $input;
@@ -26,7 +28,7 @@ public class AlgorithmModel {
 
         try {
             $instance.start();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             System.out.println($e.getMessage());
         }
 
@@ -53,7 +55,7 @@ public class AlgorithmModel {
         this.startAnalysis();
     }
 
-    private void getNecessaryInfo() {
+    private void getNecessaryInfo() throws Exception {
         this.$input.getNecessaryInfo();
     }
 
@@ -61,8 +63,9 @@ public class AlgorithmModel {
      * Запишем в синглтон топологии значения
      */
     private void setTopology() {
-        TopologyService.get().setTopology(this.$input.$topology);
-        TopologyService.get().setPointsCount(this.$input.$pointsCount);
+        TopologyService.get()
+                .setTopology(this.$input.$topology)
+                .setPointsCount(this.$input.$pointsCount);
     }
 
     /**
@@ -118,6 +121,10 @@ public class AlgorithmModel {
     }
 
     private void sortByFitness() {
+        PopulationModel $population = PopulationModel.get();
 
+        // обрати внимание: компаратор вызывается без указания класса.
+        // Это из-за статического импорта в начале файла
+        $population.$population.sort(FitnessComparator);
     }
 }

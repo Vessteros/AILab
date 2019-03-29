@@ -28,7 +28,7 @@ public class Input implements InputInterface {
         this.setScanner();
     }
 
-    public Input getNecessaryInfo() {
+    public Input getNecessaryInfo() throws Exception {
         this
             .getGenerations()
             .getPopulation()
@@ -91,12 +91,12 @@ public class Input implements InputInterface {
     }
 
     @Contract(" -> this")
-    private Input getTopology() {
+    private Input getTopology() throws Exception {
         System.out.println("Введите количество узлов сети: ");
         this.$pointsCount = $input.nextInt();
 
         if (this.$pointsCount == 0) {
-            return this;
+            throw new Exception("Решение задачи на пустом множестве элементов топологии не имеет смысла. Завершаю работу.");
         }
 
         // Для считывания строк нужен новый объект сканера, ибо конфликтует с newtInt
@@ -112,9 +112,7 @@ public class Input implements InputInterface {
             String[] $valueList = $valueRow.split("/");
 
             if ($valueList.length != this.$pointsCount) {
-                System.out.println("Количество элементов в строке не соответствует указанному количеству генов в геноме");
-                System.out.println("Завершаю работу.");
-                return this;
+                throw new Exception("Количество элементов в строке не соответствует указанному количеству генов в геноме. Завершаю работу.");
             }
 
             // для каждого столбца

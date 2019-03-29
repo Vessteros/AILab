@@ -4,6 +4,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class IndividualModel {
 
@@ -32,6 +33,17 @@ public class IndividualModel {
     IndividualModel(ChromosomeModel $chromosome) {
         this.$chromosome = $chromosome;
     }
+
+    /**
+     * Лямбда выражение, изначально был анонимный классец, но IDE предложила заменить, выглядит дорого - богато,
+     * поэтому пускай
+     */
+    static Comparator<IndividualModel> FitnessComparator = ($individual1, $individual2) -> {
+        int $fitnessResult1 = $individual1.$fitnessResult;
+        int $fitnessResult2 = $individual2.$fitnessResult;
+
+        return $fitnessResult2 - $fitnessResult1;
+    };
 
     /**
      * Модель хромосомы

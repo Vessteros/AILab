@@ -1,6 +1,6 @@
 package app.Helpers;
 
 public interface InputInterface {
-    Input getNecessaryInfo();
+    Input getNecessaryInfo() throws Exception;
     Input setScanner();
 }

@@ -16,12 +16,14 @@ class PopulationModel {
     static int $populationCount = 0;
     static int $generationsCount = 0;
 
-    ArrayList<IndividualModel> $population = new ArrayList<>();
+    ArrayList<IndividualModel> $population;
 
     /**
      * Закрытый конструктор синглтона
      */
-    private PopulationModel() {}
+    private PopulationModel() {
+        this.$population = new ArrayList<>();
+    }
 
     /**
      * Метод для получения объекта синглтона
