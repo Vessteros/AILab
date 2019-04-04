@@ -161,12 +161,12 @@ public class AlgorithmModel {
      * Проставляем шанс скрещивания
      */
     private void setCrossoverChance() {
-        int $point = (PopulationModel.$populationCount / 100);
+        int $point = (100 / PopulationModel.$populationCount);
 
         int $individualNumber = 1;
 
         for (IndividualModel $individual : PopulationModel.get().$population) {
-            $individual.setCrossoverChance(100 - $point*$individualNumber);
+            $individual.setCrossoverChance((float)(100.00 - $point*$individualNumber));
             $individualNumber++;
         }
     }

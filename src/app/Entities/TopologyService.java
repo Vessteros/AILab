@@ -2,7 +2,7 @@ package app.Entities;
 
 import org.jetbrains.annotations.Contract;
 
-public class TopologyService {
+class TopologyService {
 
     private static TopologyService $instance = new TopologyService();
 
