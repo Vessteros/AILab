@@ -14,6 +14,7 @@ public class AlgorithmModel {
      *
      * @param $input Input
      */
+    @Contract(pure = true)
     private AlgorithmModel(Input $input) {
         this.$input = $input;
     }

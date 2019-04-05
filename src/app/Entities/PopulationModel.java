@@ -31,6 +31,7 @@ class PopulationModel {
     /**
      * Закрытый конструктор синглтона
      */
+    @Contract(pure = true)
     private PopulationModel() {
         this.$population = new ArrayList<>();
     }

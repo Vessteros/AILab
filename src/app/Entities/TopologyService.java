@@ -13,6 +13,7 @@ public class TopologyService {
     /**
      * Приватный конструктор
      */
+    @Contract(pure = true)
     private TopologyService() {}
 
     @Contract(pure = true)
