@@ -14,11 +14,11 @@ public class IndividualModel {
 
     private int $fitnessResult;
 
-    public float getCrossoverChance() {
+    float getCrossoverChance() {
         return $crossoverChance;
     }
 
-    public void setCrossoverChance(float $crossoverChance) {
+    void setCrossoverChance(float $crossoverChance) {
         this.$crossoverChance = $crossoverChance;
     }
 

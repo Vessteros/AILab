@@ -136,11 +136,11 @@ public class Input implements InputInterface {
 
     @Contract(" -> this")
     private Input getPoints() {
-        System.out.println("Введите первый узел: ");
-        this.$firstPoint = $input.nextInt();
+        System.out.printf("Введите начальный узел (от %d до %d): \n", 1, this.$pointsCount);
+        this.$firstPoint = $input.nextInt() - 1;
 
-        System.out.println("Введите последний узел: ");
-        this.$lastPoint = $input.nextInt();
+        System.out.printf("Введите конечный узел (от %d до %d): \n", 1, this.$pointsCount);
+        this.$lastPoint = $input.nextInt() - 1;
         return this;
     }
 }
